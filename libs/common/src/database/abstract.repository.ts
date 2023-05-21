@@ -1,20 +1,13 @@
+import { Entity } from 'typeorm';
 import { Logger, NotFoundException } from '@nestjs/common';
-import {
-  Connection,
-  FilterQuery,
-  Model,
-  SaveOptions,
-  Types,
-  UpdateQuery,
-} from 'mongoose';
 
-import { AbstractDocument } from './abstract.schema';
+import { AbstractDocument, BaseEntity } from './base.entity';
 
-export abstract class AbstractRepository<TDocument extends AbstractDocument> {
+export abstract class AbstractRepository<TDocument extends BaseEntity> {
   protected abstract readonly logger: Logger;
 
   constructor(
-    protected readonly model: Model<TDocument>,
+    protected readonly entity: Entity<TDocument>,
     private readonly connection: Connection,
   ) {}
 
